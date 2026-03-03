@@ -2,22 +2,23 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
     container_name: node-app
     env_file:
-      - ./.env
+      - ./.env.production
     ports:
-      - '5000:5000'
+      - "5000:5000"
     networks:
       - node-network
     depends_on:
       - mongo
 
   mongo:
-    image: mongo:8.0.4
+    image: mongo:8.0
     container_name: node-mongo
-    ports:
-      - '27016:27017'
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
     volumes:
       - mongo-data:/data/db
     networks:

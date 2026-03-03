@@ -140,3 +140,6 @@ dist
 
 # Prisma client
 generated
+
+# Test reports
+reports
