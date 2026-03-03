@@ -3,8 +3,15 @@ import mongoose from 'mongoose';
 import { beforeEach, beforeAll, afterAll } from 'vitest';
 
 beforeAll(async () => {
-  console.log('Setting up DB..');
-  await mongoose.connect(env.mongoose.url);
+  const url = new URL(env.mongoose.url);
+  const dbName = url.pathname.replace(/^\//, '') || 'default';
+  url.pathname = `/${dbName}-test`;
+
+  const safeUrl = url.toString();
+
+  console.log(`Connecting to Test DB: ${url.pathname.replace(/^\//, '')}`);
+
+  await mongoose.connect(safeUrl);
 });
 
 beforeEach(async () => {
