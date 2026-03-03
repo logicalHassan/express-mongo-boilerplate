@@ -11,14 +11,14 @@ const key = args[0].toUpperCase();
 const value = args[1] || '';
 const projectRoot = process.cwd();
 
-function toCamelCase(str) {
+function toCamelCase(str: string) {
   return str.toLowerCase().replace(/_([a-z])/g, (g) => g[1].toUpperCase());
 }
 
 /**
  * @param {string} checkString - Specific string to check for duplication (to avoid false positives)
  */
-function inject(filePath, find, insert, checkString, position = 'after') {
+function inject(filePath: string, find: string, insert: string, checkString: string, position = 'after') {
   if (!fs.existsSync(filePath)) return false;
   const content = fs.readFileSync(filePath, 'utf8');
 
@@ -47,7 +47,7 @@ function inject(filePath, find, insert, checkString, position = 'after') {
   return true;
 }
 
-function appendToEnv(fileName) {
+function appendToEnv(fileName: string) {
   const filePath = path.join(projectRoot, fileName);
   if (fs.existsSync(filePath)) {
     const content = fs.readFileSync(filePath, 'utf8');

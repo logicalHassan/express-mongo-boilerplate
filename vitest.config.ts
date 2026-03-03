@@ -1,4 +1,4 @@
-import { defineConfig, mergeConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const baseConfig = defineConfig({
@@ -25,7 +25,7 @@ export default defineConfig({
   test: {
     ...baseConfig.test,
     reporters: ['default', 'junit'],
-    outputFile: 'test-report.xml',
+    outputFile: 'reports/test-report.xml',
 
     projects: [
       // ------------------
